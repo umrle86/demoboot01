@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="demo01boot.demo01.db.mapper.GameTypeMapper">
+
+
+
+    <select id="getGameIdByGameAllTags" resultType="java.lang.String">
+           select game_type_id from  game_type_tags where game_id=#{gameId}
+    </select>
+
+    <select id="selectTypeIdByPojo" resultType="demo01boot.demo01.db.pojo.GameTypePojo">
+           select id,game_tag from game_type  where id=#{typeId}
+    </select>
+
+
+
+
+    <insert id="insertGameTypes" parameterType="demo01boot.demo01.db.pojo.GameTypeTagsPojo">
+        insert into  game_type_tags (game_id,game_type_id) values (#{gameId},#{gameTypeId})
+    </insert>
+
+
+
+    <update id="updateGameTypes" >
+        update game_type_tags
+        <set>
+                game_type_id=#{tagsId}
+        </set>
+          where game_id=#{game_id};
+    </update>
+
+</mapper>

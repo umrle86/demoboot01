@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="demo01boot.demo01.db.mapper.GameParamsMapper">
+
+
+
+    <select id="getListGames" resultType="demo01boot.demo01.db.pojo.GameParamsPojo">
+        select  *from  game_params where deleted=0 limit  #{size},#{PageSize};
+    </select>
+
+    <select id="selectByGameName" resultType="java.lang.Long">
+        select game_id from game_params where game_name=#{gameName} limit 1;
+    </select>
+
+    <select id="selectNotByGameName" resultType="java.lang.Long">
+        select game_id from game_params where  game_name=#{gameName} and game_id!=#{gameId}
+    </select>
+
+
+    <insert id="insert" parameterType="demo01boot.demo01.db.pojo.GameParamsPojo">
+      insert into game_params (game_id,game_name,game_version) values(#{gameId},#{gameName},#{gameVersion})
+    </insert>
+
+
+
+    <update id="updateByPojo" parameterType="demo01boot.demo01.vo.params.GamePojoParams">
+        update game_params
+        <set>
+            <if test="GameName !=null and GameName !=''">
+                game_name=#{GameName},
+            </if>
+            <if test="GameVersion !=null and GameVersion !=''">
+                game_version=#{GameVersion},
+            </if>
+        </set>
+            where game_id=#{GameId};
+    </update>
+
+    <update id="deleteByGameId">
+        update game_params
+        set  deleted=1
+        where game_id=#{gameId}
+    </update>
+
+</mapper>

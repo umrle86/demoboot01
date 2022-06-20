@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Configuration;
  * @version 1.0
  */
 @Configuration //标注为配置类
-//@MapperScan("com.xiang.blog.mapper") //只需要全局配置一次
 public class MybatisConfig {
     // mybatis分页插件
     @Bean
